@@ -1,13 +1,14 @@
-from crud import CRUD
+from persistencia import CRUD
 import json
 
-class Carro:
+class Detailer:
     
-    def __init__(self, id, nome, cor, id_cliente):
+    def __init__(self, id, nome, email, fone, senha):
         self.set_id(id)
         self.set_nome(nome)
-        self.set_cor(cor)
-        self.set_id_cliente(id_cliente)
+        self.set_email(email)
+        self.set_fone(fone)
+        self.set_senha(senha)
 
     def to_json(self):
         return {
@@ -35,45 +36,53 @@ class Carro:
     def get_nome(self):
         return self.__nome
     
-    def set_cor(self, cor):
-        if cor == "":
-            raise ValueError("Cor não pode ser vazia")
+    def set_email(self, email):
+        if email == "":
+            raise ValueError("Email não pode ser vazio")
         else:
-            self.__cor = cor
+            self.__email = email
 
-    def get_cor(self):
-        return self.__cor
-    pass
-
-    def set_id_cliente(self, id_cliente):
-        if not isinstance(id_cliente, int) or id_cliente < 0:
-            raise ValueError("ID do cliente precisa ser inteiro e não negativo")
+    def get_email(self):
+        return self.__email
+    
+    def set_fone(self, fone):
+        if fone == "":
+            raise ValueError("Fone não pode ser vazio")
         else:
-            self.__id_cliente = id_cliente
+            self.__fone = fone
 
-    def get_id_cliente(self):
-        return self.__id_cliente
+    def get_fone(self):
+        return self.__fone
+    
+    def set_senha(self, senha):
+        if senha == "":
+            raise ValueError("Senha não pode ser vazia")
+        else:
+            self.__senha = senha
+
+    def get_senha(self):
+        return self.__senha
     
     def __str__(self):
-        return f"{self.__id} - {self.__nome} - {self.__cor} - {self.__id_cliente}"
+        return f"{self.__id} - {self.__nome} - {self.__email} - {self.__fone} - {self.__senha}"
 
-class Carros(CRUD):
+class Detailers(CRUD):
 
-    carros = []
+    detailers = []
 
     @classmethod
     def abrir(cls):
         cls.objetos = []
         try:
-            with open("carros.json", mode="r") as arquivo:
+            with open("detailers.json", mode="r") as arquivo:
                 s = json.load(arquivo)
                 for dic in s:
-                    c = Carro(dic["id"], dic["nome"], dic["cor"], dic["id_cliente"])
+                    c = Detailer(dic["id"], dic["nome"], dic["email"], dic["fone"], dic["senha"])
                     cls.objetos.append(c)
         except (FileNotFoundError, json.JSONDecodeError):
             pass
 
     @classmethod
     def salvar(cls):
-        with open("carros.json", mode="w") as arquivo:
+        with open("detailers.json", mode="w") as arquivo:
             json.dump([c.to_json() for c in cls.objetos], arquivo)

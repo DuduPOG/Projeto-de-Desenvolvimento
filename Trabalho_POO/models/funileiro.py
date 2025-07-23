@@ -1,4 +1,4 @@
-from crud import CRUD
+from persistencia import CRUD
 import json
 
 class Funileiro:

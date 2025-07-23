@@ -1,7 +1,7 @@
-from crud import CRUD
+from persistencia import CRUD
 import json
 
-class Detailer:
+class Cliente:
     
     def __init__(self, id, nome, email, fone, senha):
         self.set_id(id)
@@ -65,24 +65,24 @@ class Detailer:
     
     def __str__(self):
         return f"{self.__id} - {self.__nome} - {self.__email} - {self.__fone} - {self.__senha}"
+    
+class Clientes(CRUD):
 
-class Detailers(CRUD):
-
-    detailers = []
+    clientes = []
 
     @classmethod
     def abrir(cls):
         cls.objetos = []
         try:
-            with open("detailers.json", mode="r") as arquivo:
+            with open("clientes.json", mode="r") as arquivo:
                 s = json.load(arquivo)
                 for dic in s:
-                    c = Detailer(dic["id"], dic["nome"], dic["email"], dic["fone"], dic["senha"])
+                    c = Cliente(dic["id"], dic["nome"], dic["email"], dic["fone"], dic["senha"])
                     cls.objetos.append(c)
         except (FileNotFoundError, json.JSONDecodeError):
             pass
 
     @classmethod
     def salvar(cls):
-        with open("detailers.json", mode="w") as arquivo:
+        with open("clientes.json", mode="w") as arquivo:
             json.dump([c.to_json() for c in cls.objetos], arquivo)

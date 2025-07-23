@@ -1,4 +1,4 @@
-from crud import CRUD
+from persistencia import CRUD
 from datetime import datetime
 import json
 
@@ -168,7 +168,8 @@ class Servicos(CRUD):
                 s = json.load(arquivo)
                 for dic in s:
                     c = Servico(dic["id"], dic["data"], dic["desc"], dic["funilaria"], dic["valor_detailer"],
-                    dic["valor_funileiro"], dic["finalizado"], dic["id_cliente"], dic["id_detailer"], dic["id_funileiro"], dic["id_carro"])
+                                dic["valor_funileiro"], dic["finalizado"], dic["id_cliente"], dic["id_detailer"],
+                                dic["id_funileiro"], dic["id_carro"])
                     cls.objetos.append(c)
         except (FileNotFoundError, json.JSONDecodeError):
             pass
