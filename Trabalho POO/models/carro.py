@@ -9,6 +9,14 @@ class Carro:
         self.set_cor(cor)
         self.set_id_cliente(id_cliente)
 
+    def to_json(self):
+        return {
+            "id": self.get_id(),
+            "nome": self.get_nome(),
+            "cor": self.get_cor(),
+            "id_cliente": self.get_id_cliente() 
+        }
+
     def set_id(self, id):
         if not isinstance(id, int) or id < 0:
             raise ValueError("ID precisa ser inteiro e não negativo")

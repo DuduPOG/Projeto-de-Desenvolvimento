@@ -1,4 +1,5 @@
 from crud import CRUD
+from datetime import datetime
 import json
 
 class Servico:
@@ -16,6 +17,34 @@ class Servico:
         self.set_id_funileiro(id_funileiro)
         self.set_id_carro(id_carro)
 
+    def to_json(self):
+        if self.__funilaria == False:
+            return {
+                "id": self.get_id(),
+                "data": self.get_data(),
+                "desc": self.get_desc(),
+                "funilaria": self.get_funilaria(),
+                "valor_servico": self.get_valor_servico(),
+                "finalizado": self.get_finalizado(),
+                "id_cliente": self.get_id_cliente(),
+                "id_detailer": self.get_id_detailer(),
+                "id_carro": self.get_id_carro()
+            }
+        return {
+            "id": self.get_id(),
+            "data": self.get_data(),
+            "desc": self.get_desc(),
+            "funilaria": self.get_funilaria(),
+            "valor_detailer": self.get_valor_detailer(),
+            "valor_funileiro": self.get_valor_funileiro(),
+            "valor_servico": self.get_valor_servico(),
+            "finalizado": self.get_finalizado(),
+            "id_cliente": self.get_id_cliente(),
+            "id_detailer": self.get_id_detailer(),
+            "id_funileiro": self.get_id_funileiro(),
+            "id_carro": self.get_id_carro()
+        }
+
     def set_id(self, id):
         if not isinstance(id, int) or id < 0:
             raise ValueError("ID precisa ser inteiro e não negativo")
@@ -25,6 +54,65 @@ class Servico:
     def get_id(self):
         return self.__id
     
+    def set_data(self, data):
+        if not isinstance(data, datetime) or data == "":
+            raise ValueError("Data não pode ser vazia e precisa ser do tipo data")
+        else:
+            self.__data = data
+
+    def get_data(self):
+        return self.__data
+    
+    def set_desc(self, desc):
+        if desc == "":
+            raise ValueError("Descrição não pode ser vazia")
+        else:
+            self.__desc = desc
+
+    def get_desc(self):
+        return self.__desc
+    
+    def set_funilaria(self, funilaria):
+        if not isinstance(funilaria, bool) or funilaria == "":
+            raise ValueError("Funilaria não pode ser vazio e deve ser um valor lógico")
+        else:
+            self.__funilaria = funilaria
+
+    def get_funilaria(self):
+        return self.__funilaria
+    
+    def set_valor_detailer(self, valor_detailer):
+        if not isinstance(valor_detailer, float) or valor_detailer == "":
+            raise ValueError("Valor do detailer não pode ser vazio e precisa ser real")
+        else:
+            self.__valor_detailer = valor_detailer
+
+    def get_valor_detailer(self):
+        return self.__valor_detailer
+    
+    def set_valor_funileiro(self, valor_funileiro):
+        if not isinstance(valor_funileiro, float) or valor_funileiro == "":
+            raise ValueError("Valor do funileiro não pode ser vazio e precisa ser real")
+        else:
+            self.__valor_funileiro = valor_funileiro
+
+    def get_valor_funileiro(self):
+        return self.__valor_funileiro
+    
+    def get_valor_servico(self):
+        if self.__funilaria == False:
+            return self.__valor_detailer
+        return self.__valor_detailer + self.__valor_funileiro
+    
+    def set_finalizado(self, finalizado):
+        if not isinstance(finalizado, bool) or finalizado == "":
+            raise ValueError("Finalizado não pode ser vazio e deve ser um valor lógico")
+        else:
+            self.__finalizado = finalizado
+
+    def get_finalizado(self):
+        return self.__finalizado
+
     def set_id_cliente(self, id_cliente):
         if not isinstance(id_cliente, int) or id_cliente < 0:
             raise ValueError("ID do cliente precisa ser inteiro e não negativo")
@@ -64,9 +152,9 @@ class Servico:
 
     def __str__(self):
         if self.__funilaria == False:
-            return f"{self.__id} - {self.__data} - {self.__desc} - {self.__funilaria} - {self.__valor_detailer} - {self.__finalizado} - {self.__id_cliente} - {self.__id_detailer} - {self.__id_carro}"
+            return f"{self.__id} - {self.__data} - {self.__desc} - {self.__funilaria} - {self.get_valor_servico()} - {self.__finalizado} - {self.__id_cliente} - {self.__id_detailer} - {self.__id_carro}"
         else:
-            return f"{self.__id} - {self.__data} - {self.__desc} - {self.__funilaria} - {self.__valor_detailer} - {self.__valor_funileiro} - {self.__finalizado} - {self.__id_cliente} - {self.__id_detailer} - {self.__id_funileiro} - {self.__id_carro}"
+            return f"{self.__id} - {self.__data} - {self.__desc} - {self.__funilaria} - {self.__valor_detailer} - {self.__valor_funileiro} - {self.get_valor_servico()} -{self.__finalizado} - {self.__id_cliente} - {self.__id_detailer} - {self.__id_funileiro} - {self.__id_carro}"
 
 class Servicos(CRUD):
 
