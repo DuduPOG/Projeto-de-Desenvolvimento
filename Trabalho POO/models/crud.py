@@ -40,11 +40,20 @@ class CRUD(ABC):
 
     @classmethod
     def Excluir(cls, obj):
+        x = cls.listar_id(obj.get_id())
+        if x != None: 
+            cls.objetos.remove(x)
+            cls.objetos.append(obj)
+            cls.salvar()
+        else:
+            return None
+        """
         if obj not in obj.Listar():
             return None
         else:
             cls.objetos.remove(obj)
             cls.salvar()
+        """
     
     @classmethod
     @abstractmethod
