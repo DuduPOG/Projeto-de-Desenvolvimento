@@ -19,19 +19,6 @@ class Servico:
         self.set_id_carro(id_carro)
 
     def to_json(self):
-        if self.__funilaria == False:
-            return {
-                "id": self.get_id(),
-                "data": self.get_data(),
-                "desc": self.get_desc(),
-                "funilaria": self.get_funilaria(),
-                "valor_servico": self.get_valor_servico(),
-                "finalizado": self.get_finalizado(),
-                "foi_pago": self.get_pagamento(),
-                "id_cliente": self.get_id_cliente(),
-                "id_detailer": self.get_id_detailer(),
-                "id_carro": self.get_id_carro()
-            }
         return {
             "id": self.get_id(),
             "data": self.get_data(),
@@ -164,9 +151,9 @@ class Servico:
 
     def __str__(self):
         if self.__funilaria == False:
-            return f"{self.__id} - {self.__data} - {self.__desc} - {self.__funilaria} - {self.get_valor_servico()} - {self.__finalizado} - {self.__foi_pago} -{self.__id_cliente} - {self.__id_detailer} - {self.__id_carro}"
+            return f"{self.__id} - {self.__data} - {self.__desc} - {self.__funilaria} - {self.get_valor_servico()} - {self.__finalizado} - {self.__foi_pago} - {self.__id_cliente} - {self.__id_detailer} - {self.__id_carro}"
         else:
-            return f"{self.__id} - {self.__data} - {self.__desc} - {self.__funilaria} - {self.__valor_detailer} - {self.__valor_funileiro} - {self.get_valor_servico()} -{self.__finalizado} - {self.__foi_pago} - {self.__id_cliente} - {self.__id_detailer} - {self.__id_funileiro} - {self.__id_carro}"
+            return f"{self.__id} - {self.__data} - {self.__desc} - {self.__funilaria} - {self.__valor_detailer} - {self.__valor_funileiro} - {self.get_valor_servico()} - {self.__finalizado} - {self.__foi_pago} - {self.__id_cliente} - {self.__id_detailer} - {self.__id_funileiro} - {self.__id_carro}"
 
 class Servicos(CRUD):
 
