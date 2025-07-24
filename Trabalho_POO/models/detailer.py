@@ -1,4 +1,4 @@
-from persistencia import CRUD
+from models.persistencia import CRUD
 import json
 
 class Detailer:
@@ -14,8 +14,9 @@ class Detailer:
         return {
             "id": self.get_id(),
             "nome": self.get_nome(),
-            "cor": self.get_cor(),
-            "id_cliente": self.get_id_cliente() 
+            "email": self.get_email(),
+            "fone": self.get_fone(),
+            "senha": self.get_senha(), 
         }
 
     def set_id(self, id):

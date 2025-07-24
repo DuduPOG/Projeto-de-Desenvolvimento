@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from view import View
+from view.view import View
 import time
 
 class ManterClienteUI:
@@ -17,7 +17,7 @@ class ManterClienteUI:
 
     def listar():
 
-        clientes = View.cliente_listar()
+        clientes = View.cliente_listar_todos()
 
         if len(clientes) == 0: 
             st.write("Nenhum cliente cadastrado")
@@ -47,7 +47,7 @@ class ManterClienteUI:
 
     def atualizar():
 
-        clientes = View.cliente_listar()
+        clientes = View.cliente_listar_todos()
 
         if len(clientes) == 0: 
             st.write("Nenhum cliente cadastrado")
@@ -70,7 +70,7 @@ class ManterClienteUI:
 
     def excluir():
 
-        clientes = View.cliente_listar()
+        clientes = View.cliente_listar_todos()
 
         if len(clientes) == 0: 
             st.write("Nenhum cliente cadastrado")

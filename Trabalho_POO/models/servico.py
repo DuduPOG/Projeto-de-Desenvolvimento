@@ -1,10 +1,10 @@
-from persistencia import CRUD
+from models.persistencia import CRUD
 from datetime import datetime
 import json
 
 class Servico:
 
-    def __init__(self, id, data, desc, funilaria, valor_detailer, valor_funileiro, finalizado, id_cliente, id_detailer, id_funileiro, id_carro):
+    def __init__(self, id, data, desc, funilaria, valor_detailer, valor_funileiro, finalizado, foi_pago, id_cliente, id_detailer, id_funileiro, id_carro):
         self.set_id(id)
         self.set_data(data)
         self.set_desc(desc)
@@ -12,6 +12,7 @@ class Servico:
         self.set_valor_detailer(valor_detailer)
         self.set_valor_funileiro(valor_funileiro)
         self.set_finalizado(finalizado)
+        self.set_pagamento(foi_pago)
         self.set_id_cliente(id_cliente)
         self.set_id_detailer(id_detailer)
         self.set_id_funileiro(id_funileiro)
@@ -26,6 +27,7 @@ class Servico:
                 "funilaria": self.get_funilaria(),
                 "valor_servico": self.get_valor_servico(),
                 "finalizado": self.get_finalizado(),
+                "foi_pago": self.get_pagamento(),
                 "id_cliente": self.get_id_cliente(),
                 "id_detailer": self.get_id_detailer(),
                 "id_carro": self.get_id_carro()
@@ -39,6 +41,7 @@ class Servico:
             "valor_funileiro": self.get_valor_funileiro(),
             "valor_servico": self.get_valor_servico(),
             "finalizado": self.get_finalizado(),
+            "foi_pago": self.get_pagamento(),
             "id_cliente": self.get_id_cliente(),
             "id_detailer": self.get_id_detailer(),
             "id_funileiro": self.get_id_funileiro(),
@@ -110,6 +113,15 @@ class Servico:
         else:
             self.__finalizado = finalizado
 
+    def set_pagamento(self, foi_pago):
+        if not isinstance(foi_pago, bool) or foi_pago == "":
+            raise ValueError("A confirmação do pagamento não pode ser vazia e deve ser um valor lógico")
+        else:
+            self.__foi_pago = foi_pago
+
+    def get_pagamento(self):
+        return self.__foi_pago
+
     def get_finalizado(self):
         return self.__finalizado
 
@@ -152,9 +164,9 @@ class Servico:
 
     def __str__(self):
         if self.__funilaria == False:
-            return f"{self.__id} - {self.__data} - {self.__desc} - {self.__funilaria} - {self.get_valor_servico()} - {self.__finalizado} - {self.__id_cliente} - {self.__id_detailer} - {self.__id_carro}"
+            return f"{self.__id} - {self.__data} - {self.__desc} - {self.__funilaria} - {self.get_valor_servico()} - {self.__finalizado} - {self.__foi_pago} -{self.__id_cliente} - {self.__id_detailer} - {self.__id_carro}"
         else:
-            return f"{self.__id} - {self.__data} - {self.__desc} - {self.__funilaria} - {self.__valor_detailer} - {self.__valor_funileiro} - {self.get_valor_servico()} -{self.__finalizado} - {self.__id_cliente} - {self.__id_detailer} - {self.__id_funileiro} - {self.__id_carro}"
+            return f"{self.__id} - {self.__data} - {self.__desc} - {self.__funilaria} - {self.__valor_detailer} - {self.__valor_funileiro} - {self.get_valor_servico()} -{self.__finalizado} - {self.__foi_pago} - {self.__id_cliente} - {self.__id_detailer} - {self.__id_funileiro} - {self.__id_carro}"
 
 class Servicos(CRUD):
 
@@ -168,8 +180,8 @@ class Servicos(CRUD):
                 s = json.load(arquivo)
                 for dic in s:
                     c = Servico(dic["id"], dic["data"], dic["desc"], dic["funilaria"], dic["valor_detailer"],
-                                dic["valor_funileiro"], dic["finalizado"], dic["id_cliente"], dic["id_detailer"],
-                                dic["id_funileiro"], dic["id_carro"])
+                                dic["valor_funileiro"], dic["finalizado"], dic["foi_pago"], dic["id_cliente"],
+                                dic["id_detailer"], dic["id_funileiro"], dic["id_carro"])
                     cls.objetos.append(c)
         except (FileNotFoundError, json.JSONDecodeError):
             pass

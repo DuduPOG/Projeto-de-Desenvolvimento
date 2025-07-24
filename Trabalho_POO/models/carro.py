@@ -1,4 +1,4 @@
-from persistencia import CRUD
+from models.persistencia import CRUD
 import json
 
 class Carro:

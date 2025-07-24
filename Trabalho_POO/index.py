@@ -18,9 +18,8 @@ class IndexUI:
         if op == "Abrir Conta": AbrirContaUI.main()
 
     def menu_admin():            
-        op = st.sidebar.selectbox("Menu", ["Cadastro de Categorias", "Cadastro de Clientes", 
-                                  "Cadastro de Detailers", "Cadastro de Funileiros", 
-                                  "Cadastro de Serviços"])
+        op = st.sidebar.selectbox("Menu", ["Cadastro de Carros", "Cadastro de Clientes", 
+                                  "Cadastro de Detailers", "Cadastro de Funileiros"])
         
         if op == "Cadastro de Carros":
             ManterCarroUI.main()

@@ -8,14 +8,14 @@ class View:
 
     @staticmethod
     def cliente_autenticar(email, senha):
-        for c in View.cliente_listar():
+        for c in View.cliente_listar_todos():
             if c.get_email() == email and c.get_senha() == senha:
                 return {"id" : c.get_id(), "nome" : c.get_nome()}
         return None
 
     @staticmethod
     def cadastrar_admin():
-        for cliente in Clientes.listar():
+        for cliente in Clientes.Listar():
             if cliente.get_email() == "admin":
                 return
         View.cliente_inserir("admin", "admin", "84911223344","1234")

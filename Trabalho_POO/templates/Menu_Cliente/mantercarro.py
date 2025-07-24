@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from view import View
+from view.view import View
 import time
 
 class ManterCarroUI:
@@ -33,10 +33,11 @@ class ManterCarroUI:
 
         nome = st.text_input("Informe o nome: ")
         cor = st.text_input("Informe a cor: ")
-        id_cliente = st.number_input("Informe o id do proprietário: ")
+        id_cliente = st.text_input("Informe o id do proprietário: ")
 
         if st.button("Cadastrar"):
             try:
+                id_cliente = int(id_cliente)
                 View.carro_inserir(nome, cor, id_cliente)
                 st.success("Carro inserido com sucesso")
                 time.sleep(2)
@@ -57,9 +58,10 @@ class ManterCarroUI:
                 op = st.selectbox("Atualização de carro", carros)
                 nome = st.text_input("Informe o novo nome: ", op.get_nome())
                 cor = st.text_input("Informe a nova cor: ", op.get_email())
-                id_cliente = st.number_input("Reinforme o id do proprietário: ", op.get_id_cliente())
+                id_cliente = st.text_input("Reinforme o id do proprietário (número inteiro não negativo): ", op.get_id_cliente())
 
                 if st.button("Atualizar"):
+                    id_cliente = int(id_cliente)
                     View.carro_atualizar(op.get_id(), nome, cor, id_cliente)
                     st.success("Carro atualizado com sucesso")
                     time.sleep(2)
