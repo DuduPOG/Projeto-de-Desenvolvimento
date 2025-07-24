@@ -57,7 +57,7 @@ class ManterCarroUI:
 
                 op = st.selectbox("Atualização de carro", carros)
                 nome = st.text_input("Informe o novo nome: ", op.get_nome())
-                cor = st.text_input("Informe a nova cor: ", op.get_email())
+                cor = st.text_input("Informe a nova cor: ", op.get_cor())
                 id_cliente = st.text_input("Reinforme o id do proprietário (número inteiro não negativo): ", op.get_id_cliente())
 
                 if st.button("Atualizar"):

@@ -8,7 +8,7 @@ class ManterFunileiroUI:
     @staticmethod
     def main():
 
-        st.header("Cadastro de Clientes")
+        st.header("Cadastro de Funileiros")
         tab1, tab2, tab3, tab4 = st.tabs(["Listar", "Inserir", "Atualizar", "Excluir"])
         with tab1: ManterFunileiroUI.listar()
         with tab2: ManterFunileiroUI.inserir()
@@ -50,14 +50,14 @@ class ManterFunileiroUI:
 
     def atualizar():
 
-        funileiros = View.funileiros_listar_todos()
+        funileiros = View.funileiro_listar_todos()
 
         if len(funileiros) == 0: 
             st.write("Nenhum funileiro cadastrado")
         else:
             try:
 
-                op = st.selectbox("Atualização de cliente", funileiros)
+                op = st.selectbox("Atualização de funileiro", funileiros)
                 nome = st.text_input("Informe o novo nome: ", op.get_nome())
                 email = st.text_input("Informe o novo e-mail: ", op.get_email())
                 fone = st.text_input("Informe o novo fone: ", op.get_fone())

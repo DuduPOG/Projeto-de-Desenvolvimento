@@ -62,7 +62,7 @@ class ManterDetailerUI:
                 fone = st.text_input("Informe o novo fone: ", op.get_fone())
 
                 if st.button("Atualizar"):
-                    View.cliente_atualizar(op.get_id(), nome, email, fone, op.get_senha())
+                    View.detailer_atualizar(op.get_id(), nome, email, fone, op.get_senha())
                     st.success("Detailer atualizado com sucesso")
                     time.sleep(2)
                     st.rerun()

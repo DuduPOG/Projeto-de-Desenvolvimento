@@ -108,7 +108,7 @@ class View:
         Funileiros.Inserir(funileiro)
 
     @staticmethod
-    def funileiro_listar():
+    def funileiro_listar_todos():
         return Funileiros.Listar()
     
     @staticmethod

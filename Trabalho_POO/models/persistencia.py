@@ -29,7 +29,7 @@ class CRUD(ABC):
 
     @classmethod
     def Atualizar(cls, obj):
-        x = cls.listar_id(obj.get_id())
+        x = cls.Listar_ID(obj.get_id())
         if x != None: 
             cls.objetos.remove(x)
             cls.objetos.append(obj)
@@ -39,10 +39,10 @@ class CRUD(ABC):
 
     @classmethod
     def Excluir(cls, obj):
-        x = cls.listar_id(obj.get_id())
+        x = cls.Listar_ID(obj.get_id())
         if x != None: 
             cls.objetos.remove(x)
-            cls.objetos.append(obj)
+            #cls.objetos.append(obj)
             cls.salvar()
         else:
             return None
