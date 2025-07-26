@@ -6,6 +6,8 @@ from models.servico import Servico, Servicos
 
 class View:
 
+# Operações iniciais
+
     @staticmethod
     def cliente_autenticar(email, senha):
         for c in View.cliente_listar_todos():
@@ -19,6 +21,8 @@ class View:
             if cliente.get_email() == "admin":
                 return
         View.cliente_inserir("admin", "admin", "84911223344","1234")
+
+#=======================================================
 
 # Operações do Cliente
 
@@ -47,7 +51,44 @@ class View:
             return
         else:
             Carros.Excluir(carro)
+
+    @staticmethod
+    def agendar_servico():
+        pass
+
+    @staticmethod
+    def listar_servicos_cliente():
+        pass
+
+    @staticmethod
+    def realizar_pagamento():
+        pass
+
 #=======================================================
+
+#Operações do Detailer
+
+    def listar_servicos_detailer():
+        pass
+
+    def lancar_servico_detailer():
+        pass
+
+    def finalizar_servico():
+        pass
+
+#=======================================================
+
+#Operações do Funileiro
+
+    def listar_servicos_funileiro():
+        pass
+
+    def lancar_servico_funileiro():
+        pass
+
+#=======================================================
+
 # Operações do Administrador
 
     @staticmethod
@@ -129,28 +170,13 @@ class View:
             Funileiros.Excluir(funileiro)
 
     @staticmethod
-    def servico_inserir(data, desc, funilaria, valor_detailer, valor_funileiro, finalizado, id_cliente, id_detailer, id_funileiro, id_carro):
-        servico = Servico(0, data, desc, funilaria, valor_detailer, valor_funileiro, finalizado, id_cliente, id_detailer, id_funileiro, id_carro)
-        Servicos.Inserir(servico)
+    def servicos_listar_todos():
+        return Servicos.Listar()
 
     @staticmethod
-    def servico_listar_todos():
-        return Servicos.Listar()
-    
-    @staticmethod
-    def servico_listar_por_id(id):
-        return Servicos.Listar_ID(id)
-    
-    @staticmethod
-    def servico_atualizar(id, data, desc, funilaria, valor_detailer, valor_funileiro, finalizado, id_cliente, id_detailer, id_funileiro, id_carro):
-        servico = Servico(id, data, desc, funilaria, valor_detailer, valor_funileiro, finalizado, id_cliente, id_detailer, id_funileiro, id_carro)
+    def reajustar_valor_servico(servico, novo_preco_detailer, novo_preco_funileiro):
+        servico = Servico(servico.get_id(), servico.get_data(), servico.get_desc(), servico.get_funilaria(), novo_preco_detailer, novo_preco_funileiro, servico.get_finalizado(), servico.get_id_cliente(), servico.get_id_detailer(), servico.get_id_funileiro(), servico.get_id_carro())
         Servicos.Atualizar(servico)
 
-    @staticmethod
-    def servico_excluir(id):
-        servico = Servicos.Listar_ID(id)
-        if servico == None:
-            return
-        else:
-            Servicos.Excluir(servico)
 #=======================================================
+
