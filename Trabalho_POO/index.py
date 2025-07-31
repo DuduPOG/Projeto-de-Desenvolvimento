@@ -7,6 +7,9 @@ from templates.Menu_Admin.manterfunileiro import ManterFunileiroUI
 from templates.Menu_Visitante.login import LoginUI
 from templates.Menu_Visitante.abrirconta import AbrirContaUI
 from templates.Menu_Cliente.mantercarro import ManterCarroUI
+from templates.Menu_Cliente.agendar_serviçoUI import Agendar_serviçoUI
+from templates.Menu_Cliente.Listar_serviços_clientes import ListarserviçosclientesUI
+from templates.Menu_Cliente.realizar_pagamentoUI import Realizar_pagamentoUI
 
 
 class IndexUI:
@@ -35,6 +38,28 @@ class IndexUI:
 
         #if op == "Cadastro de Serviços":
          #   ManterServicoUI.main()
+
+    def menu_cliente():
+        id_cliente = st.session_state.get('cliente_id')
+        
+        #trocar o carrinho pelo carro do cliente
+
+        """
+        if "carrinho_atual" not in st.session_state:
+            st.session_state.carrinho_atual = View.iniciar_carrinho(id_cliente)
+        """
+
+        op = st.sidebar.selectbox("Menu", ["Cadastrar Carro", "Agendar serviço", 
+                                  "Listar meus Serviços", "Realizar pagamento"])
+
+        if op == "Cadastrar Carro" : ManterCarroUI.main()
+
+        if op == "Agendar serviço" : Agendar_serviçoUI.main()
+
+        if op == "Listar meus Serviços" : ListarserviçosclientesUI.main()
+
+        if op == "Realizar pagamento" : Realizar_pagamentoUI.main()
+        
     
     def sair_do_sistema():
         if st.sidebar.button("Sair"):
@@ -66,25 +91,6 @@ class IndexUI:
 IndexUI.main()
 
 """
-def menu_cliente():
-        id_cliente = st.session_state.get('cliente_id')
-        if "carrinho_atual" not in st.session_state:
-            st.session_state.carrinho_atual = View.iniciar_carrinho(id_cliente)
-
-        
-
-        op = st.sidebar.selectbox("Menu", ["Adicionar Produto no Carrinho", "Ver Carrinho", 
-                                  "Fechar Pedido", "Ver Meus Pedidos","Comprar novamente"])
-
-        if op == "Adicionar Produto no Carrinho" : Adicionar_produtos.main(st.session_state.carrinho_atual)
-
-        if op == "Ver Carrinho" : Ver_carrinho.main(st.session_state.carrinho_atual)
-
-        if op == "Fechar Pedido" : Fechar_pedido.main(st.session_state.carrinho_atual, id_cliente)
-
-        if op == "Ver Meus Pedidos" : Ver_pedidos.main(st.session_state.carrinho_atual)
-        
-        if op == "Comprar novamente": Comprar_novamente.main(st.session_state.carrinho_atual) 
         
     def menu_detailer():
         op = st.sidebar.selectbox("Menu", ["Listar Minhas Entregas", "Confirmar Entrega"])
