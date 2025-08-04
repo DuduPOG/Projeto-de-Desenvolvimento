@@ -6,7 +6,7 @@ from templates.Menu_Admin.manterdetailer import ManterDetailerUI
 from templates.Menu_Admin.manterfunileiro import ManterFunileiroUI
 from templates.Menu_Visitante.login import LoginUI
 from templates.Menu_Visitante.abrirconta import AbrirContaUI
-from templates.Menu_Cliente.mantercarro import ManterCarroUI
+from templates.Menu_Cliente.Cadastrar_Carro import Cadastrar_CarroUI
 from templates.Menu_Cliente.agendar_serviçoUI import Agendar_serviçoUI
 from templates.Menu_Cliente.Listar_serviços_clientes import ListarserviçosclientesUI
 from templates.Menu_Cliente.realizar_pagamentoUI import Realizar_pagamentoUI
@@ -52,7 +52,7 @@ class IndexUI:
         op = st.sidebar.selectbox("Menu", ["Cadastrar Carro", "Agendar serviço", 
                                   "Listar meus Serviços", "Realizar pagamento"])
 
-        if op == "Cadastrar Carro" : ManterCarroUI.main()
+        if op == "Cadastrar Carro" : Cadastrar_CarroUI.main()
 
         if op == "Agendar serviço" : Agendar_serviçoUI.main()
 

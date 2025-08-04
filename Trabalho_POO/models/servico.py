@@ -21,7 +21,7 @@ class Servico:
     def to_json(self):
         return {
             "id": self.get_id(),
-            "data": self.get_data(),
+            "data": self.get_data().strftime("%d/%m/%Y %H:%M"),
             "desc": self.get_desc(),
             "funilaria": self.get_funilaria(),
             "valor_detailer": self.get_valor_detailer(),
@@ -45,13 +45,13 @@ class Servico:
         return self.__id
     
     def set_data(self, data):
-        if not isinstance(data, datetime) or data == "":
+        if data == "":
             raise ValueError("Data não pode ser vazia e precisa ser do tipo data")
         else:
             self.__data = data
 
     def get_data(self):
-        return self.__data
+        return self.__data 
     
     def set_desc(self, desc):
         if desc == "":

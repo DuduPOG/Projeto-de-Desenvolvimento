@@ -3,27 +3,31 @@ import pandas as pd
 from view.view import View
 import time
 
-class ManterCarroUI:
+class Cadastrar_CarroUI:
     
     @staticmethod
     def main():
 
         st.header("Cadastro de Carros")
         tab1, tab2, tab3, tab4 = st.tabs(["Listar", "Inserir", "Atualizar", "Excluir"])
-        with tab1: ManterCarroUI.listar()
-        with tab2: ManterCarroUI.inserir()
-        with tab3: ManterCarroUI.atualizar()
-        with tab4: ManterCarroUI.excluir()
+        with tab1: Cadastrar_CarroUI.listar()
+        with tab2: Cadastrar_CarroUI.inserir()
+        with tab3: Cadastrar_CarroUI.atualizar()
+        with tab4: Cadastrar_CarroUI.excluir()
 
     def listar():
+        Carros = []
+        for carros in View.carro_listar_todos():
+            if carros.get_id_cliente() != st.session_state.get('cliente_id'):
+                continue
+            else:
+                Carros.append(carros)
 
-        carros = View.carro_listar_todos()
-
-        if len(carros) == 0: 
-            st.write("Nenhum carro cadastrado")
+        if len(Carros) == 0: 
+            st.write("Você não tem nenhum carro cadastrado")
         else:    
             list_dic = []
-            for obj in carros:
+            for obj in Carros:
                 dic_carro = obj.to_json()
                 list_dic.append(dic_carro)
             df = pd.DataFrame(list_dic)
@@ -33,7 +37,7 @@ class ManterCarroUI:
 
         nome = st.text_input("Informe o nome: ")
         cor = st.text_input("Informe a cor: ")
-        id_cliente = st.text_input("Informe o id do proprietário: ")
+        id_cliente = st.session_state.get('cliente_id')
 
         if st.button("Cadastrar"):
             try:
@@ -58,7 +62,7 @@ class ManterCarroUI:
                 op = st.selectbox("Atualização de carro", carros)
                 nome = st.text_input("Informe o novo nome: ", op.get_nome())
                 cor = st.text_input("Informe a nova cor: ", op.get_cor())
-                id_cliente = st.text_input("Reinforme o id do proprietário (número inteiro não negativo): ", op.get_id_cliente())
+                id_cliente = st.session_state.get('cliente_id')
 
                 if st.button("Atualizar"):
                     id_cliente = int(id_cliente)
@@ -84,3 +88,11 @@ class ManterCarroUI:
                 st.success("Carro excluído com sucesso")
                 time.sleep(2)
                 st.rerun()
+    """
+    @staticmethod
+    def ManterCarroClienteUI():
+        id_cliente = st.session_state.get('cliente_id')
+        for carro in Carros.Listar():
+            if carro.get_id_cliente() == id_cliente:
+                return carro
+    """

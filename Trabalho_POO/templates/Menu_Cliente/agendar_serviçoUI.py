@@ -1,9 +1,56 @@
 import streamlit as st
 from view.view import View
+import time 
+from datetime import datetime
 
 
 class Agendar_serviçoUI:
     
     @staticmethod
     def main():
-        st.header("TESTE")
+
+        st.header("Agendar Serviço")
+        tab1, tab2 = st.tabs(["Iniciar Serviço", "Excluir"])
+        with tab1: Agendar_serviçoUI.inserir()
+        with tab2: Agendar_serviçoUI.excluir()
+      
+    def inserir():
+        data = datetime.now()
+        descrição = st.text_input("Descrição do serviço: ")
+        funilaria = False
+        valor_detailer = 0.0
+        valor_funileiro = 0.0
+        finalizado = False
+        foi_pago = False
+        id_cliente = st.session_state.get('cliente_id')
+        id_detailer = 0
+        id_funileiro = 0
+        carro = st.selectbox("Selecione o carro", View.listar_carros_por_id( st.session_state.get('cliente_id')))   
+        id_carro = carro.get_id() 
+
+
+        if st.button("Agendar serviço"):
+            try:
+                id_cliente = int(id_cliente)
+                View.serviço_inserir(data , descrição, funilaria, valor_detailer, valor_funileiro, finalizado, foi_pago, id_cliente, id_detailer, id_funileiro, id_carro)
+                st.success("Agendamento concluiddo com sucesso")
+                time.sleep(2)
+                st.rerun()
+
+            except ValueError as erro:
+                st.error(erro)
+
+    def excluir():
+
+        Serviços = View.servicos_listar_por_id(id_cliente = st.session_state.get('cliente_id'))
+
+        if len(Serviços) == 0: 
+            st.write("Nenhum serviço cadastrado")
+        else:
+            op = st.selectbox("Exclusão de serviço", Serviços)
+            
+            if st.button("Excluir"):
+                View.Serviços_excluir(op.get_id())
+                st.success("Carro excluído com sucesso")
+                time.sleep(2)
+                st.rerun()
