@@ -205,7 +205,6 @@ class View:
 
     @staticmethod
     def serviço_inserir(data , descrição, funilaria, valor_detailer, valor_funileiro, finalizado, foi_pago, id_cliente, id_detailer, id_funileiro, id_carro):
-        data = datetime.now()
         servico = Servico(0, data, descrição, funilaria, valor_detailer, valor_funileiro, finalizado, foi_pago, id_cliente, id_detailer, id_funileiro, id_carro)
         Servicos.Inserir(servico)
 
@@ -216,6 +215,26 @@ class View:
             return
         else:
             Servicos.Excluir(Serviços)
+
+    @staticmethod
+    def realizar_pagamento(id_servico):
+        Serviços = []
+        for x in Servicos.Listar():
+            if x.get_id() != id_servico:
+                continue
+            else:
+                Serviços.append(x)
+
+        for y in Serviços:
+            Servico = y
+
+        if Servico.get_pagamento() == True:
+            raise ValueError("Serviço já foi pago")
+        else:
+            novo_status_de_pagamento = True 
+            Servico.set_pagamento(novo_status_de_pagamento)
+            Servicos.Atualizar(Servico)
+        
 
 #=======================================================
 

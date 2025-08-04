@@ -15,7 +15,7 @@ class Agendar_serviçoUI:
         with tab2: Agendar_serviçoUI.excluir()
       
     def inserir():
-        data = datetime.now()
+        data = time.strftime("%Y-%m-%d %H:%M:%S")
         descrição = st.text_input("Descrição do serviço: ")
         funilaria = False
         valor_detailer = 0.0

@@ -8,5 +8,27 @@ class ListarserviçosclientesUI:
     @staticmethod
     def main():
 
-        st.header("Listar meus serviço:")
-      
+        st.header("Listar meus serviços:")
+        
+        Serviços = []
+        for x in View.servicos_listar_por_id(id_cliente = st.session_state.get('cliente_id')):
+            Serviços.append(x)
+
+        if len(Serviços) == 0: 
+            st.write("Você não tem nenhum carro cadastrado")
+        else:    
+            list_dic = []
+            for obj in Serviços:
+                dic_x = obj.to_json()
+
+                del dic_x['id']
+                del dic_x['valor_funileiro']
+                del dic_x['id_cliente']
+                del dic_x['id_detailer']
+                del dic_x['id_funileiro']
+                del dic_x['id_carro']
+                
+                
+                list_dic.append(dic_x)
+            df = pd.DataFrame(list_dic)
+            st.dataframe(df)

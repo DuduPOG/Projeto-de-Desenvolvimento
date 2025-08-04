@@ -21,7 +21,7 @@ class Servico:
     def to_json(self):
         return {
             "id": self.get_id(),
-            "data": self.get_data().strftime("%d/%m/%Y %H:%M"),
+            "data": self.get_data(),
             "desc": self.get_desc(),
             "funilaria": self.get_funilaria(),
             "valor_detailer": self.get_valor_detailer(),
