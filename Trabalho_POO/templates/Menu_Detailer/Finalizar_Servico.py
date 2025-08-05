@@ -5,24 +5,24 @@ import time
 class FinalizarServicoUI:
     def main():
 
-        st.header("Finalizar meus serviços")
+        st.header("Finalizar Meus Serviços")
 
-        Serviços = []
+        Servicos = []
         for x in View.servicos_listar_todos():
             if x.get_pagamento() == True:
                 continue
             else:
-                Serviços.append(x)
+                Servicos.append(x)
 
-        if len(Serviços) == 0:
-            st.write("Você não tem nenhum serviço pendente de pagamento")
+        if len(Servicos) == 0:
+            st.write("Você não tem nenhum Serviço pendente de pagamento")
 
-        op = st.selectbox("Selecione o serviço para finalizar", Serviços)
+        op = st.selectbox("Selecione o Serviço para finalizar", Servicos)
  
-        if st.button("Mandar para funilaria"):
+        if st.button("Mandar para Funilaria"):
             View.lancar_servico_funileiro(op)
             
-        if st.button("finalizar serviço"):
+        if st.button("Finalizar Serviço"):
             try:
                 View.finalizar_servico()
                 st.success("Pagamento realizado com sucesso")

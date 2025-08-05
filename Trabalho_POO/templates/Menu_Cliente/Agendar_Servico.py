@@ -4,19 +4,19 @@ import time
 from datetime import datetime
 
 
-class AgendarServiçoUI:
+class AgendarServicoUI:
     
     @staticmethod
     def main():
 
         st.header("Agendar Serviço")
         tab1, tab2 = st.tabs(["Iniciar Serviço", "Excluir"])
-        with tab1: AgendarServiçoUI.inserir()
-        with tab2: AgendarServiçoUI.excluir()
+        with tab1: AgendarServicoUI.inserir()
+        with tab2: AgendarServicoUI.excluir()
       
     def inserir():
         data = time.strftime("%Y-%m-%d %H:%M:%S")
-        descrição = st.text_input("Descrição do serviço: ")
+        descrição = st.text_input("Descrição do Serviço: ")
         funilaria = False
         valor_detailer = 0.0
         valor_funileiro = 0.0
@@ -25,15 +25,15 @@ class AgendarServiçoUI:
         id_cliente = st.session_state.get('cliente_id')
         id_detailer = 0
         id_funileiro = 0
-        carro = st.selectbox("Selecione o carro", View.listar_carros_por_id( st.session_state.get('cliente_id')))   
+        carro = st.selectbox("Selecione o Carro", View.listar_carros_por_id( st.session_state.get('cliente_id')))   
         id_carro = carro.get_id() 
 
 
-        if st.button("Agendar serviço"):
+        if st.button("Agendar Serviço"):
             try:
                 id_cliente = int(id_cliente)
                 View.serviço_inserir(data , descrição, funilaria, valor_detailer, valor_funileiro, finalizado, foi_pago, id_cliente, id_detailer, id_funileiro, id_carro)
-                st.success("Agendamento concluiddo com sucesso")
+                st.success("Agendamento concluído com sucesso")
                 time.sleep(2)
                 st.rerun()
 
@@ -45,9 +45,9 @@ class AgendarServiçoUI:
         Serviços = View.servicos_listar_por_id(id_cliente = st.session_state.get('cliente_id'))
 
         if len(Serviços) == 0: 
-            st.write("Nenhum serviço cadastrado")
+            st.write("Nenhum Serviço cadastrado")
         else:
-            op = st.selectbox("Exclusão de serviço", Serviços)
+            op = st.selectbox("Exclusão de Serviço", Serviços)
             
             if st.button("Excluir"):
                 View.Serviços_excluir(op.get_id())

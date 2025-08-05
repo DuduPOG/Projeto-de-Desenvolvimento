@@ -13,8 +13,8 @@ from templates.Menu_Cliente.Realizar_Pagamento import RealizarPagamentoUI
 from templates.Menu_Detailer.Listar_Servicos_Detailer import ListarServicosDetailerUI
 from templates.Menu_Detailer.Lancar_Servico import LancarServicoDUI
 from templates.Menu_Detailer.Finalizar_Servico import FinalizarServicoUI
-from templates.Menu_Funileiro.Listar_Servicos_Funileiro import ListarServicoFunileiroUI
-from templates.Menu_Detailer.Lancar_Servico import LancarServicoFUI
+from templates.Menu_Funileiro.Listar_Servicos_Funileiro import ListarServicosFunileiroUI
+from templates.Menu_Funileiro.Lancar_Servico import LancarServicoFUI
 
 
 class IndexUI:
@@ -74,7 +74,7 @@ class IndexUI:
 
         if op == "Listar Minhas Entregas":
             ListarServicosFunileiroUI.main()
-            
+
         if op == "Lançar Serviço":
             LancarServicoFUI.main()
         
