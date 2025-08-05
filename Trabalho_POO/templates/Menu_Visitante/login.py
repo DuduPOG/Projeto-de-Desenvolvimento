@@ -14,3 +14,23 @@ class LoginUI:
                 st.session_state["cliente_id"] = c["id"]
                 st.session_state["cliente_nome"] = c["nome"]
                 st.rerun()
+
+        elif st.button("Entrar como Detailer"):
+            c = View.detailer_autenticar(email, senha)
+
+            if c == None:
+                st.write("e-mail ou senha inválidos")
+            else:
+                st.session_state["detailer_id"] = c["id"]
+                st.session_state["detailer_nome"] = c["nome"]
+                st.rerun()
+
+        elif st.button("Entrar como Funileiro"):
+            c = View.funileiro_autenticar(email, senha)
+
+            if c == None:
+                st.write("e-mail ou senha inválidos")
+            else:
+                st.session_state["funileiro_id"] = c["id"]
+                st.session_state["funileiro_nome"] = c["nome"]
+                st.rerun()

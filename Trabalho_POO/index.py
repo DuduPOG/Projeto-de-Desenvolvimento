@@ -10,6 +10,8 @@ from templates.Menu_Cliente.Cadastrar_Carro import Cadastrar_CarroUI
 from templates.Menu_Cliente.agendar_serviçoUI import Agendar_serviçoUI
 from templates.Menu_Cliente.Listar_serviços_clientes import ListarserviçosclientesUI
 from templates.Menu_Cliente.realizar_pagamentoUI import Realizar_pagamentoUI
+from templates.Menu_Detailer.Listar_serviços_detailer import Listar_Entregas_DetailerUI
+from templates.Menu_Detailer.Finalizar_serviço import Confirmar_Entrega_detailerUI
 
 
 class IndexUI:
@@ -40,14 +42,6 @@ class IndexUI:
          #   ManterServicoUI.main()
 
     def menu_cliente():
-        id_cliente = st.session_state.get('cliente_id')
-        
-        #trocar o carrinho pelo carro do cliente
-
-        """
-        if "carrinho_atual" not in st.session_state:
-            st.session_state.carrinho_atual = View.iniciar_carrinho(id_cliente)
-        """
 
         op = st.sidebar.selectbox("Menu", ["Cadastrar Carro", "Agendar serviço", 
                                   "Listar meus Serviços", "Realizar pagamento"])
@@ -59,28 +53,59 @@ class IndexUI:
         if op == "Listar meus Serviços" : ListarserviçosclientesUI.main()
 
         if op == "Realizar pagamento" : Realizar_pagamentoUI.main()
+
+    def menu_detailer():
+        op = st.sidebar.selectbox("Menu", ["Listar Meus serviços", "Finalizar pedido"])
+
+        if op == "Listar Meus serviços":
+            Listar_Entregas_DetailerUI.main()
+        if op == "Finalizar pedido":
+            Confirmar_Entrega_detailerUI.main()
+
+    def menu_funileiro():
+        op = st.sidebar.selectbox("Menu", ["Listar Meus serviços", "Finalizar pedido"])
+        if op == "Listar Minhas Entregas":
+            Listar_EntregasUI.main()
+        if op == "Confirmar Entrega":
+            Confirmar_EntregaUI.main()
         
     
     def sair_do_sistema():
         if st.sidebar.button("Sair"):
-            del st.session_state["cliente_id"]
-            del st.session_state["cliente_nome"]
-            st.rerun()
+        
+            chaves = [
+            "cliente_id",
+            "cliente_nome",
+            "detailer_nome",
+            "detailer_id",
+            "funileiro_nome",
+            "funileiro_id",
+            ]
+        
+            for chave in chaves:
+                if chave in st.session_state:
+                    del st.session_state[chave]
+
+        st.rerun()
 
     def sidebar():
         st.write(st.session_state)
-        if "cliente_id" not in st.session_state:
+
+        if "cliente_id" == 0:
+            IndexUI.menu_admin()
+        
+        if "cliente_id" in st.session_state != 0 :
+            IndexUI.menu_cliente() 
+
+        if "detailer_id" in st.session_state:
+            IndexUI.menu_detailer()
+
+        if "funileiro_id" in st.session_state:
+            IndexUI.menu_funileiro()  
+
+        if not("cliente_id" == 0) and not("cliente_id" in st.session_state != 0 ) and not("detailer_id" in st.session_state) and not("funileiro_id" in st.session_state) :
             IndexUI.menu_visitante()
-        else:
-            admin = st.session_state["cliente_nome"] == "admin"
-            st.sidebar.write(f"Bem vindo(a), " + st.session_state["cliente_nome"])
-            if admin:
-                IndexUI.menu_admin()
-            #elif st.session_state["cliente_nome"] == "eduardo":
-            #    IndexUI.menu_entregador()
-            else:
-                IndexUI.menu_cliente()
-            IndexUI.sair_do_sistema()
+        IndexUI.sair_do_sistema()
     
     def main():
         # verifica a existe o usuário admin
@@ -90,19 +115,3 @@ class IndexUI:
 
 IndexUI.main()
 
-"""
-        
-    def menu_detailer():
-        op = st.sidebar.selectbox("Menu", ["Listar Minhas Entregas", "Confirmar Entrega"])
-        if op == "Listar Minhas Entregas":
-            Listar_EntregasUI.main()
-        if op == "Confirmar Entrega":
-            Confirmar_EntregaUI.main()
-
-    def menu_funileiro():
-        op = st.sidebar.selectbox("Menu", ["Listar Minhas Entregas", "Confirmar Entrega"])
-        if op == "Listar Minhas Entregas":
-            Listar_EntregasUI.main()
-        if op == "Confirmar Entrega":
-            Confirmar_EntregaUI.main()
-"""

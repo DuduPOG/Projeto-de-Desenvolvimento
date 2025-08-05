@@ -79,12 +79,12 @@ class View:
 #=======================================================
 
 #Operações do Detailer
-
-    def listar_servicos_detailer():
-        pass
-
-    def lancar_servico_detailer():
-        pass
+    @staticmethod
+    def detailer_autenticar(email, senha):
+        for c in View.detailer_listar_todos():
+            if c.get_email() == email and c.get_senha() == senha:
+                return {"id" : c.get_id(), "nome" : c.get_nome()}
+        return None
 
     def finalizar_servico():
         pass
@@ -92,12 +92,20 @@ class View:
 #=======================================================
 
 #Operações do Funileiro
+    @staticmethod
+    def funileiro_autenticar(email, senha):
+        for c in View.funileiro_listar_todos():
+            if c.get_email() == email and c.get_senha() == senha:
+                return {"id" : c.get_id(), "nome" : c.get_nome()}
+        return None
 
     def listar_servicos_funileiro():
         pass
 
-    def lancar_servico_funileiro():
-        pass
+    def lancar_servico_funileiro(Servico):
+        novo_status = True 
+        Servico.set_funilaria(novo_status)
+        Servicos.Atualizar(Servico)
 
 #=======================================================
 

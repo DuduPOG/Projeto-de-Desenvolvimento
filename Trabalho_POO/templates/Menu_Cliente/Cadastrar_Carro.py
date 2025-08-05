@@ -29,6 +29,10 @@ class Cadastrar_CarroUI:
             list_dic = []
             for obj in Carros:
                 dic_carro = obj.to_json()
+
+                del dic_carro['id_cliente']
+                del dic_carro['id']
+
                 list_dic.append(dic_carro)
             df = pd.DataFrame(list_dic)
             st.dataframe(df)

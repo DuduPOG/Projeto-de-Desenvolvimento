@@ -1,0 +1,32 @@
+import streamlit as st
+import pandas as pd
+from view.view import View
+
+class Listar_Entregas_DetailerUI:
+    def main():
+
+        st.header("Listar meus serviços:")
+        
+        Serviços = []
+        for x in View.servicos_listar_todos():
+            if x.get_pagamento() == False:
+                Serviços.append(x)
+            else:
+                continue
+
+        if len(Serviços) == 0: 
+            st.write("Você não tem nenhum serviço disponível")
+        else:    
+            list_dic = []
+            for obj in Serviços:
+                dic_x = obj.to_json()
+
+                del dic_x['id']
+                del dic_x['id_cliente']
+                del dic_x['id_detailer']
+                del dic_x['id_funileiro']
+                del dic_x['id_carro']
+                
+                list_dic.append(dic_x)
+            df = pd.DataFrame(list_dic)
+            st.dataframe(df)
