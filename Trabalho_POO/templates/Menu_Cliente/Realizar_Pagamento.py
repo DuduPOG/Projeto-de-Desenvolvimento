@@ -3,7 +3,7 @@ import pandas as pd
 from view.view import View
 import time
 
-class Realizar_pagamentoUI:
+class RealizarPagamentoUI:
     
     @staticmethod
     def main():

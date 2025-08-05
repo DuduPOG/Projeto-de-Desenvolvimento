@@ -6,12 +6,15 @@ from templates.Menu_Admin.manterdetailer import ManterDetailerUI
 from templates.Menu_Admin.manterfunileiro import ManterFunileiroUI
 from templates.Menu_Visitante.login import LoginUI
 from templates.Menu_Visitante.abrirconta import AbrirContaUI
-from templates.Menu_Cliente.Cadastrar_Carro import Cadastrar_CarroUI
-from templates.Menu_Cliente.agendar_serviçoUI import Agendar_serviçoUI
-from templates.Menu_Cliente.Listar_serviços_clientes import ListarserviçosclientesUI
-from templates.Menu_Cliente.realizar_pagamentoUI import Realizar_pagamentoUI
-from templates.Menu_Detailer.Listar_serviços_detailer import Listar_Entregas_DetailerUI
-from templates.Menu_Detailer.Finalizar_serviço import Confirmar_Entrega_detailerUI
+from templates.Menu_Cliente.Cadastrar_Carro import ManterCarroUI
+from templates.Menu_Cliente.Agendar_Servico import AgendarServicoUI
+from templates.Menu_Cliente.Listar_Servicos_Cliente import ListarServicosClienteUI
+from templates.Menu_Cliente.Realizar_Pagamento import RealizarPagamentoUI
+from templates.Menu_Detailer.Listar_Servicos_Detailer import ListarServicosDetailerUI
+from templates.Menu_Detailer.Lancar_Servico import LancarServicoDUI
+from templates.Menu_Detailer.Finalizar_Servico import FinalizarServicoUI
+from templates.Menu_Funileiro.Listar_Servicos_Funileiro import ListarServicoFunileiroUI
+from templates.Menu_Detailer.Lancar_Servico import LancarServicoFUI
 
 
 class IndexUI:
@@ -46,28 +49,34 @@ class IndexUI:
         op = st.sidebar.selectbox("Menu", ["Cadastrar Carro", "Agendar serviço", 
                                   "Listar meus Serviços", "Realizar pagamento"])
 
-        if op == "Cadastrar Carro" : Cadastrar_CarroUI.main()
+        if op == "Cadastrar Carro" : ManterCarroUI.main()
 
-        if op == "Agendar serviço" : Agendar_serviçoUI.main()
+        if op == "Agendar serviço" : AgendarServicoUI.main()
 
-        if op == "Listar meus Serviços" : ListarserviçosclientesUI.main()
+        if op == "Listar meus Serviços" : ListarServicosClienteUI.main()
 
-        if op == "Realizar pagamento" : Realizar_pagamentoUI.main()
+        if op == "Realizar pagamento" : RealizarPagamentoUI.main()
 
     def menu_detailer():
-        op = st.sidebar.selectbox("Menu", ["Listar Meus serviços", "Finalizar pedido"])
+        op = st.sidebar.selectbox("Menu", ["Listar Meus Serviços", "Lançar Serviço","Finalizar Serviço"])
 
         if op == "Listar Meus serviços":
-            Listar_Entregas_DetailerUI.main()
-        if op == "Finalizar pedido":
-            Confirmar_Entrega_detailerUI.main()
+            ListarServicosDetailerUI.main()
+
+        if op == "Lançar Serviço":
+            LancarServicoDUI.main()
+
+        if op == "Finalizar Serviço":
+            FinalizarServicoUI.main()
 
     def menu_funileiro():
-        op = st.sidebar.selectbox("Menu", ["Listar Meus serviços", "Finalizar pedido"])
+        op = st.sidebar.selectbox("Menu", ["Listar Meus Serviços", "Lançar Serviço"])
+
         if op == "Listar Minhas Entregas":
-            Listar_EntregasUI.main()
-        if op == "Confirmar Entrega":
-            Confirmar_EntregaUI.main()
+            ListarServicosFunileiroUI.main()
+            
+        if op == "Lançar Serviço":
+            LancarServicoFUI.main()
         
     
     def sair_do_sistema():

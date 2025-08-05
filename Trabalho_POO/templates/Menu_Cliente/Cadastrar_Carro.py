@@ -3,17 +3,17 @@ import pandas as pd
 from view.view import View
 import time
 
-class Cadastrar_CarroUI:
+class ManterCarroUI:
     
     @staticmethod
     def main():
 
         st.header("Cadastro de Carros")
         tab1, tab2, tab3, tab4 = st.tabs(["Listar", "Inserir", "Atualizar", "Excluir"])
-        with tab1: Cadastrar_CarroUI.listar()
-        with tab2: Cadastrar_CarroUI.inserir()
-        with tab3: Cadastrar_CarroUI.atualizar()
-        with tab4: Cadastrar_CarroUI.excluir()
+        with tab1: ManterCarroUI.listar()
+        with tab2: ManterCarroUI.inserir()
+        with tab3: ManterCarroUI.atualizar()
+        with tab4: ManterCarroUI.excluir()
 
     def listar():
         Carros = []

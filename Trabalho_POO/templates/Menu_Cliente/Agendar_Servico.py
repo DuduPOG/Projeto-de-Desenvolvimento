@@ -4,15 +4,15 @@ import time
 from datetime import datetime
 
 
-class Agendar_serviçoUI:
+class AgendarServiçoUI:
     
     @staticmethod
     def main():
 
         st.header("Agendar Serviço")
         tab1, tab2 = st.tabs(["Iniciar Serviço", "Excluir"])
-        with tab1: Agendar_serviçoUI.inserir()
-        with tab2: Agendar_serviçoUI.excluir()
+        with tab1: AgendarServiçoUI.inserir()
+        with tab2: AgendarServiçoUI.excluir()
       
     def inserir():
         data = time.strftime("%Y-%m-%d %H:%M:%S")

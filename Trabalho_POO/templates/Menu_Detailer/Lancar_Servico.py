@@ -2,20 +2,18 @@ import streamlit as st
 from view.view import View
 import time
 
-class Confirmar_Entrega_detailerUI:
+class FinalizarServicoUI:
     def main():
 
-        st.header("Finalizar meus serviços")
+        st.header("Lançar Meus Serviços")
 
         Serviços = []
         for x in View.servicos_listar_todos():
-            if x.get_pagamento() == True:
-                continue
-            else:
+            if x.get_id_detailer == "seu_id" and x.get_finalizado() == False:
                 Serviços.append(x)
 
         if len(Serviços) == 0:
-            st.write("Você não tem nenhum serviço pendente de pagamento")
+            st.write("Você não tem nenhum serviço para ser lançado")
 
         op = st.selectbox("Selecione o serviço para finalizar", Serviços)
  

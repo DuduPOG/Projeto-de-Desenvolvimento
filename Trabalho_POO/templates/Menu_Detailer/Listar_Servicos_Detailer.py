@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 from view.view import View
 
-class Listar_Entregas_DetailerUI:
+class ListarServicosDetailerUI:
     def main():
 
         st.header("Listar meus serviços:")
