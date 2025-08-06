@@ -8,21 +8,21 @@ class RealizarPagamentoUI:
     @staticmethod
     def main():
 
-        st.header("Realizar pagamento:")
+        st.header("Realizar Pagamento:")
 
-        Serviços = []
+        Servicos = []
         for x in View.servicos_listar_por_id(id_cliente = st.session_state.get('cliente_id')):
             if x.get_pagamento() == True:
                 continue
             else:
-                Serviços.append(x)
+                Servicos.append(x)
 
-        if len(Serviços) == 0:
-            st.write("Você não tem nenhum serviço pendente de pagamento")
+        if len(Servicos) == 0:
+            st.write("Você não tem nenhum Serviço pendente de pagamento")
         
         else:
             list_dic = []
-            for obj in Serviços:
+            for obj in Servicos:
                 dic_x = obj.to_json()
 
                 del dic_x['id']
@@ -36,7 +36,7 @@ class RealizarPagamentoUI:
             df = pd.DataFrame(list_dic)
             st.dataframe(df)
 
-            op = st.selectbox("Selecione o serviço para pagamento", Serviços)
+            op = st.selectbox("Selecione o serviço para pagamento", Servicos)
 
             if st.button("Realizar pagamento"):
                 try:

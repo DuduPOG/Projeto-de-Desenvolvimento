@@ -26,11 +26,8 @@ class IndexUI:
         if op == "Abrir Conta": AbrirContaUI.main()
 
     def menu_admin():            
-        op = st.sidebar.selectbox("Menu", ["Cadastro de Carros", "Cadastro de Clientes", 
+        op = st.sidebar.selectbox("Menu", ["Cadastro de Clientes", 
                                   "Cadastro de Detailers", "Cadastro de Funileiros"])
-        
-        if op == "Cadastro de Carros":
-            ManterCarroUI.main()
 
         if op == "Cadastro de Clientes":
             ManterClienteUI.main()
@@ -41,26 +38,23 @@ class IndexUI:
         if op == "Cadastro de Funileiros":
             ManterFunileiroUI.main()
 
-        #if op == "Cadastro de Serviços":
-         #   ManterServicoUI.main()
-
     def menu_cliente():
 
-        op = st.sidebar.selectbox("Menu", ["Cadastrar Carro", "Agendar serviço", 
-                                  "Listar meus Serviços", "Realizar pagamento"])
+        op = st.sidebar.selectbox("Menu", ["Cadastrar Carro", "Agendar Serviço", 
+                                  "Listar Meus Serviços", "Realizar Pagamento"])
 
         if op == "Cadastrar Carro" : ManterCarroUI.main()
 
-        if op == "Agendar serviço" : AgendarServicoUI.main()
+        if op == "Agendar Serviço" : AgendarServicoUI.main()
 
-        if op == "Listar meus Serviços" : ListarServicosClienteUI.main()
+        if op == "Listar Meus Serviços" : ListarServicosClienteUI.main()
 
-        if op == "Realizar pagamento" : RealizarPagamentoUI.main()
+        if op == "Realizar Pagamento" : RealizarPagamentoUI.main()
 
     def menu_detailer():
-        op = st.sidebar.selectbox("Menu", ["Listar Meus Serviços", "Lançar Serviço","Finalizar Serviço"])
+        op = st.sidebar.selectbox("Menu", ["Listar Meus Serviços", "Lançar Serviço", "Finalizar Serviço"])
 
-        if op == "Listar Meus serviços":
+        if op == "Listar Meus Serviços":
             ListarServicosDetailerUI.main()
 
         if op == "Lançar Serviço":
@@ -72,7 +66,7 @@ class IndexUI:
     def menu_funileiro():
         op = st.sidebar.selectbox("Menu", ["Listar Meus Serviços", "Lançar Serviço"])
 
-        if op == "Listar Minhas Entregas":
+        if op == "Listar Minhas Serviços":
             ListarServicosFunileiroUI.main()
 
         if op == "Lançar Serviço":

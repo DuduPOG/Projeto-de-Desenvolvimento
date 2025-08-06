@@ -9,7 +9,7 @@ class LancarServicoFUI:
 
         Servicos = []
         for x in View.servicos_listar_todos():
-            if x.get_id_funileiro == "seu_id" and x.get_finalizado() == False and x.get_funilaria == True:
+            if x.get_id_funileiro() == st.session_state.get('funileiro_id') and x.get_finalizado() == False and x.get_funilaria() == True:
                 Servicos.append(x)
 
         if len(Servicos) == 0:
@@ -19,7 +19,7 @@ class LancarServicoFUI:
             
         if st.button("Lançar Serviço"):
             try:
-                View.finalizar_servico()
+                View.lancar_servico_funileiro(op)
                 st.success("Serviço lançado com sucesso")
                 time.sleep(2)
                 st.rerun()

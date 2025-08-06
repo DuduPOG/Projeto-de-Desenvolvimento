@@ -10,11 +10,7 @@ class AgendarServicoUI:
     def main():
 
         st.header("Agendar Serviço")
-        tab1, tab2 = st.tabs(["Iniciar Serviço", "Excluir"])
-        with tab1: AgendarServicoUI.inserir()
-        with tab2: AgendarServicoUI.excluir()
       
-    def inserir():
         data = time.strftime("%Y-%m-%d %H:%M:%S")
         descrição = st.text_input("Descrição do Serviço: ")
         funilaria = False
@@ -25,8 +21,13 @@ class AgendarServicoUI:
         id_cliente = st.session_state.get('cliente_id')
         id_detailer = 0
         id_funileiro = 0
-        carro = st.selectbox("Selecione o Carro", View.listar_carros_por_id( st.session_state.get('cliente_id')))   
-        id_carro = carro.get_id() 
+        carros = View.carro_listar_todos()
+        meus_carros = []
+        for carro in carros:
+            if carro.get_id_cliente() == st.session_state.get('cliente_id'):
+                meus_carros.append(carro)
+        op = st.selectbox("Selecione o Carro", meus_carros)   
+        id_carro = op.get_id() 
 
 
         if st.button("Agendar Serviço"):
@@ -39,18 +40,3 @@ class AgendarServicoUI:
 
             except ValueError as erro:
                 st.error(erro)
-
-    def excluir():
-
-        Serviços = View.servicos_listar_por_id(id_cliente = st.session_state.get('cliente_id'))
-
-        if len(Serviços) == 0: 
-            st.write("Nenhum Serviço cadastrado")
-        else:
-            op = st.selectbox("Exclusão de Serviço", Serviços)
-            
-            if st.button("Excluir"):
-                View.Serviços_excluir(op.get_id())
-                st.success("Carro excluído com sucesso")
-                time.sleep(2)
-                st.rerun()

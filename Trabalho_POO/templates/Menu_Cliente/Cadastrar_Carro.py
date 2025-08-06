@@ -57,13 +57,17 @@ class ManterCarroUI:
     def atualizar():
 
         carros = View.carro_listar_todos()
+        meus_carros = []
+        for carro in carros:
+            if carro.get_id_cliente() == st.session_state.get('cliente_id'):
+                meus_carros.append(carro)
 
-        if len(carros) == 0: 
+        if len(meus_carros) == 0: 
             st.write("Nenhum Carro cadastrado")
         else:
             try:
 
-                op = st.selectbox("Atualização de Carro", carros)
+                op = st.selectbox("Atualização de Carro", meus_carros)
                 nome = st.text_input("Informe o novo nome: ", op.get_nome())
                 cor = st.text_input("Informe a nova cor: ", op.get_cor())
                 id_cliente = st.session_state.get('cliente_id')
@@ -81,11 +85,15 @@ class ManterCarroUI:
     def excluir():
 
         carros = View.carro_listar_todos()
+        meus_carros = []
+        for carro in carros:
+            if carro.get_id_cliente() == st.session_state.get('cliente_id'):
+                meus_carros.append(carro)
 
-        if len(carros) == 0: 
+        if len(meus_carros) == 0: 
             st.write("Nenhum Carro cadastrado")
         else:
-            op = st.selectbox("Exclusão de Carro", carros)
+            op = st.selectbox("Exclusão de Carro", meus_carros)
             
             if st.button("Excluir"):
                 View.carro_excluir(op.get_id())

@@ -9,7 +9,7 @@ class LancarServicoDUI:
 
         Servicos = []
         for x in View.servicos_listar_todos():
-            if x.get_id_detailer == "seu_id" and x.get_finalizado() == False:
+            if x.get_id_detailer() == st.session_state.get('detailer_id') and x.get_finalizado() == False:
                 Servicos.append(x)
 
         if len(Servicos) == 0:
@@ -18,11 +18,11 @@ class LancarServicoDUI:
         op = st.selectbox("Selecione o Serviço para lançar", Servicos)
  
         if st.button("Mandar para Funilaria"):
-            View.lancar_servico_funileiro(op)
+            Servicos.set_funilaria(True)
             
         if st.button("Lançar Serviço"):
             try:
-                View.finalizar_servico()
+                View.lancar_servico_detailer(op)
                 st.success("Serviço lançado com sucesso")
                 time.sleep(2)
                 st.rerun()

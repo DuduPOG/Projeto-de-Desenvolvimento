@@ -18,9 +18,6 @@ class FinalizarServicoUI:
             st.write("Você não tem nenhum Serviço pendente de pagamento")
 
         op = st.selectbox("Selecione o Serviço para finalizar", Servicos)
- 
-        if st.button("Mandar para Funilaria"):
-            View.lancar_servico_funileiro(op)
             
         if st.button("Finalizar Serviço"):
             try:

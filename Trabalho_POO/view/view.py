@@ -42,10 +42,10 @@ class View:
         return Carros.Listar_ID(id)
     
     @staticmethod
-    def listar_carros_por_id(id_cliente):
+    def listar_carros_por_id(id):
         Carros = []
         for carro in View.carro_listar_todos():
-            if carro.get_id_cliente() != id_cliente:
+            if carro.get_id_cliente() != id:
                 continue
             else:
                 Carros.append(carro)
@@ -69,12 +69,16 @@ class View:
         pass
 
     @staticmethod
-    def listar_servicos_cliente():
-        pass
+    def listar_servicos_cliente(id):
+        servicos_cliente = []
+        for servico in View.servicos_listar_todos():
+            if servico.get_id_cliente() == id:
+                servicos_cliente.append(servico)
+        return servicos_cliente
 
     @staticmethod
-    def realizar_pagamento():
-        pass
+    def realizar_pagamento(servico):
+        servico.set_pagamento(True)
 
 #=======================================================
 
@@ -85,9 +89,23 @@ class View:
             if c.get_email() == email and c.get_senha() == senha:
                 return {"id" : c.get_id(), "nome" : c.get_nome()}
         return None
+    
+    @staticmethod
+    def listar_servicos_detailer(id):
+        servicos_detailer = []
+        for servico in View.servicos_listar_todos():
+            if servico.get_id_detailer() == id:
+                servicos_detailer.append(id)
+        return servicos_detailer
+    
+    @staticmethod
+    def lancar_servico_detailer(servico):
+        servico.set_funilaria(servico.get_funilaria())
+        Servicos.Atualizar(servico)
 
-    def finalizar_servico():
-        pass
+    @staticmethod
+    def finalizar_servico(servico):
+        servico.set_finalizado(True)
 
 #=======================================================
 
@@ -99,9 +117,15 @@ class View:
                 return {"id" : c.get_id(), "nome" : c.get_nome()}
         return None
 
-    def listar_servicos_funileiro():
-        pass
-
+    @staticmethod
+    def listar_servicos_funileiro(id):
+        servicos_funileiro = []
+        for servico in View.servicos_listar_todos():
+            if servico.get_id_funileiro() == id:
+                servicos_funileiro.append(id)
+        return servicos_funileiro
+    
+    @staticmethod
     def lancar_servico_funileiro(Servico):
         novo_status = True 
         Servico.set_funilaria(novo_status)
@@ -222,27 +246,7 @@ class View:
         if Serviços == None:
             return
         else:
-            Servicos.Excluir(Serviços)
-
-    @staticmethod
-    def realizar_pagamento(id_servico):
-        Serviços = []
-        for x in Servicos.Listar():
-            if x.get_id() != id_servico:
-                continue
-            else:
-                Serviços.append(x)
-
-        for y in Serviços:
-            Servico = y
-
-        if Servico.get_pagamento() == True:
-            raise ValueError("Serviço já foi pago")
-        else:
-            novo_status_de_pagamento = True 
-            Servico.set_pagamento(novo_status_de_pagamento)
-            Servicos.Atualizar(Servico)
-        
+            Servicos.Excluir(Serviços)        
 
 #=======================================================
 

@@ -9,7 +9,7 @@ class ListarServicosFunileiroUI:
         
         Servicos = []
         for x in View.servicos_listar_todos():
-            if x.get_id_funileiro() == "seu_id":
+            if x.get_id_funileiro() == st.session_state.get('detailer_id'):
                 Servicos.append(x)
             else:
                 continue
