@@ -1,9 +1,9 @@
 import streamlit as st
 from view.view import View
-from templates.Menu_Admin.mantercarro import ManterCarroUI
 from templates.Menu_Admin.mantercliente import ManterClienteUI
 from templates.Menu_Admin.manterdetailer import ManterDetailerUI
 from templates.Menu_Admin.manterfunileiro import ManterFunileiroUI
+from templates.Menu_Admin.reajustarvaloresservicos import ReajustarValoresServicosUI
 from templates.Menu_Visitante.login import LoginUI
 from templates.Menu_Visitante.abrirconta import AbrirContaUI
 from templates.Menu_Cliente.Cadastrar_Carro import ManterCarroUI
@@ -26,8 +26,8 @@ class IndexUI:
         if op == "Abrir Conta": AbrirContaUI.main()
 
     def menu_admin():            
-        op = st.sidebar.selectbox("Menu", ["Cadastro de Clientes", 
-                                  "Cadastro de Detailers", "Cadastro de Funileiros"])
+        op = st.sidebar.selectbox("Menu", ["Cadastro de Clientes", "Cadastro de Detailers",
+                                  "Cadastro de Funileiros", "Reajustar Valor dos Serviços"])
 
         if op == "Cadastro de Clientes":
             ManterClienteUI.main()
@@ -37,6 +37,9 @@ class IndexUI:
             
         if op == "Cadastro de Funileiros":
             ManterFunileiroUI.main()
+        
+        if op == "Reajustar Valor dos Serviços":
+            ReajustarValoresServicosUI.main()
 
     def menu_cliente():
 
@@ -97,17 +100,18 @@ class IndexUI:
         if "cliente_id" == 0:
             IndexUI.menu_admin()
         
-        if "cliente_id" in st.session_state != 0 :
+        elif "cliente_id" in st.session_state != 0:
             IndexUI.menu_cliente() 
 
-        if "detailer_id" in st.session_state:
+        elif "detailer_id" in st.session_state:
             IndexUI.menu_detailer()
 
-        if "funileiro_id" in st.session_state:
+        elif "funileiro_id" in st.session_state:
             IndexUI.menu_funileiro()  
 
-        if not("cliente_id" == 0) and not("cliente_id" in st.session_state != 0 ) and not("detailer_id" in st.session_state) and not("funileiro_id" in st.session_state) :
+        elif not("cliente_id" == 0) and not("cliente_id" in st.session_state != 0 ) and not("detailer_id" in st.session_state) and not("funileiro_id" in st.session_state) :
             IndexUI.menu_visitante()
+
         IndexUI.sair_do_sistema()
     
     def main():

@@ -18,7 +18,7 @@ class LancarServicoDUI:
         op = st.selectbox("Selecione o Serviço para lançar", Servicos)
  
         if st.button("Mandar para Funilaria"):
-            Servicos.set_funilaria(True)
+            op.set_funilaria(True)
             
         if st.button("Lançar Serviço"):
             try:

@@ -33,7 +33,7 @@ class AgendarServicoUI:
         if st.button("Agendar Serviço"):
             try:
                 id_cliente = int(id_cliente)
-                View.serviço_inserir(data , descrição, funilaria, valor_detailer, valor_funileiro, finalizado, foi_pago, id_cliente, id_detailer, id_funileiro, id_carro)
+                View.agendar_servico(data , descrição, funilaria, valor_detailer, valor_funileiro, finalizado, foi_pago, id_cliente, id_detailer, id_funileiro, id_carro)
                 st.success("Agendamento concluído com sucesso")
                 time.sleep(2)
                 st.rerun()

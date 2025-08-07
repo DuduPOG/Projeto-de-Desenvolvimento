@@ -11,8 +11,9 @@ class ListarServicosClienteUI:
         st.header("Listar Meus Serviços:")
         
         Servicos = []
-        for x in View.servicos_listar_por_id(id_cliente = st.session_state.get('cliente_id')):
-            Servicos.append(x)
+        for x in View.servicos_listar_todos():
+            if x.get_id_cliente() == st.session_state.get("cliente_id"):
+                Servicos.append(x)
 
         if len(Servicos) == 0: 
             st.write("Você não tem nenhum Serviço cadastrado")

@@ -40,7 +40,7 @@ class RealizarPagamentoUI:
 
             if st.button("Realizar pagamento"):
                 try:
-                    View.realizar_pagamento(op.get_id())
+                    View.realizar_pagamento(op)
                     st.success("Pagamento realizado com sucesso")
                     time.sleep(2)
                     st.rerun()

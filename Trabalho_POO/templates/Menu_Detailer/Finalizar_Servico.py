@@ -21,8 +21,8 @@ class FinalizarServicoUI:
             
         if st.button("Finalizar Serviço"):
             try:
-                View.finalizar_servico()
-                st.success("Pagamento realizado com sucesso")
+                View.finalizar_servico(op)
+                st.success("Serviço finalizado com sucesso")
                 time.sleep(2)
                 st.rerun()
             except ValueError as erro:

@@ -9,10 +9,8 @@ class ListarServicosFunileiroUI:
         
         Servicos = []
         for x in View.servicos_listar_todos():
-            if x.get_id_funileiro() == st.session_state.get('detailer_id'):
+            if x.get_id_funileiro() == st.session_state.get('funileiro_id'):
                 Servicos.append(x)
-            else:
-                continue
 
         if len(Servicos) == 0: 
             st.write("Você não tem nenhum Serviço disponível")

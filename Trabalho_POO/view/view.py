@@ -65,8 +65,9 @@ class View:
             Carros.Excluir(carro)
 
     @staticmethod
-    def agendar_servico():
-        pass
+    def agendar_servico(data , descrição, funilaria, valor_detailer, valor_funileiro, finalizado, foi_pago, id_cliente, id_detailer, id_funileiro, id_carro):
+        servico = Servico(0, data , descrição, funilaria, valor_detailer, valor_funileiro, finalizado, foi_pago, id_cliente, id_detailer, id_funileiro, id_carro)
+        Servicos.Inserir(servico)
 
     @staticmethod
     def listar_servicos_cliente(id):
@@ -83,6 +84,7 @@ class View:
 #=======================================================
 
 #Operações do Detailer
+
     @staticmethod
     def detailer_autenticar(email, senha):
         for c in View.detailer_listar_todos():
@@ -212,7 +214,14 @@ class View:
             return
         else:
             Funileiros.Excluir(funileiro)
+
+    @staticmethod
+    def reajustar_valor_servico(servico, novo_preco_detailer, novo_preco_funileiro):
+        servico = Servico(servico.get_id(), servico.get_data() , servico.get_desc(), servico.get_funilaria(), novo_preco_detailer, novo_preco_funileiro, servico.get_finalizado(), servico.get_id_cliente(), servico.get_id_detailer(), servico.get_id_funileiro(), servico.get_id_carro())
+        Servicos.Atualizar(servico)
+
 #=======================================================
+
 # Operações de Serviço
 
     @staticmethod
@@ -220,20 +229,8 @@ class View:
         return Servicos.Listar()
 
     @staticmethod
-    def servicos_listar_por_id(id_cliente):
-        Serviços = []
-        for servico in Servicos.Listar():
-            if servico.get_id_cliente() != id_cliente:
-                continue
-            else:
-                Serviços.append(servico)
-        return Serviços
-
-
-    @staticmethod
-    def reajustar_valor_servico(servico, novo_preco_detailer, novo_preco_funileiro):
-        servico = Servico(servico.get_id(), servico.get_data() , servico.get_desc(), servico.get_funilaria(), novo_preco_detailer, novo_preco_funileiro, servico.get_finalizado(), servico.get_id_cliente(), servico.get_id_detailer(), servico.get_id_funileiro(), servico.get_id_carro())
-        Servicos.Atualizar(servico)
+    def servicos_listar_por_id(id):
+        return Servicos.Listar_ID(id)
 
     @staticmethod
     def serviço_inserir(data , descrição, funilaria, valor_detailer, valor_funileiro, finalizado, foi_pago, id_cliente, id_detailer, id_funileiro, id_carro):
