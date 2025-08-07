@@ -92,24 +92,23 @@ class IndexUI:
                 if chave in st.session_state:
                     del st.session_state[chave]
 
-        st.rerun()
+        #st.rerun()
 
     def sidebar():
         st.write(st.session_state)
 
-        if "cliente_id" == 0:
+        if st.session_state.get("cliente_id") == 0:
             IndexUI.menu_admin()
         
-        elif "cliente_id" in st.session_state != 0:
+        elif st.session_state.get("cliente_id") is not None and st.session_state.get("cliente_id") != 0:
             IndexUI.menu_cliente() 
 
-        elif "detailer_id" in st.session_state:
+        elif st.session_state.get("detailer_id") is not None:
             IndexUI.menu_detailer()
 
-        elif "funileiro_id" in st.session_state:
+        elif st.session_state.get("funileiro_id") is not None:
             IndexUI.menu_funileiro()  
-
-        elif not("cliente_id" == 0) and not("cliente_id" in st.session_state != 0 ) and not("detailer_id" in st.session_state) and not("funileiro_id" in st.session_state) :
+        else:
             IndexUI.menu_visitante()
 
         IndexUI.sair_do_sistema()

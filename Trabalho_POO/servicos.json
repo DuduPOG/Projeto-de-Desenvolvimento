@@ -1,1 +1,1 @@
-[]
+[{"id": 0, "data": "2025-08-07 16:46:47", "desc": "Polimento", "funilaria": true, "valor_detailer": 200.0, "valor_funileiro": 100.0, "valor_servico": 300.0, "finalizado": false, "foi_pago": false, "id_cliente": 2, "id_detailer": 0, "id_funileiro": 0, "id_carro": 0}, {"id": 1, "data": "2025-08-07 17:11:44", "desc": "Envelopamento", "funilaria": true, "valor_detailer": 1000.0, "valor_funileiro": 0.0, "valor_servico": 1000.0, "finalizado": true, "foi_pago": true, "id_cliente": 2, "id_detailer": 0, "id_funileiro": 0, "id_carro": 2}]

@@ -18,9 +18,7 @@ class ManterCarroUI:
     def listar():
         Carros = []
         for carros in View.carro_listar_todos():
-            if carros.get_id_cliente() != st.session_state.get('cliente_id'):
-                continue
-            else:
+            if carros.get_id_cliente() == st.session_state.get('cliente_id'):
                 Carros.append(carros)
 
         if len(Carros) == 0: 
@@ -100,11 +98,3 @@ class ManterCarroUI:
                 st.success("Carro excluído com sucesso")
                 time.sleep(2)
                 st.rerun()
-    """
-    @staticmethod
-    def ManterCarroClienteUI():
-        id_cliente = st.session_state.get('cliente_id')
-        for carro in Carros.Listar():
-            if carro.get_id_cliente() == id_cliente:
-                return carro
-    """

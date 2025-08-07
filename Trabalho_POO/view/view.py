@@ -41,15 +41,6 @@ class View:
     def carro_listar_por_id(id):
         return Carros.Listar_ID(id)
     
-    @staticmethod
-    def listar_carros_por_id(id):
-        Carros = []
-        for carro in View.carro_listar_todos():
-            if carro.get_id_cliente() != id:
-                continue
-            else:
-                Carros.append(carro)
-        return Carros
     
     @staticmethod
     def carro_atualizar(id, nome, cor, id_cliente):
@@ -80,6 +71,7 @@ class View:
     @staticmethod
     def realizar_pagamento(servico):
         servico.set_pagamento(True)
+        Servicos.Atualizar(servico)
 
 #=======================================================
 
@@ -101,13 +93,16 @@ class View:
         return servicos_detailer
     
     @staticmethod
-    def lancar_servico_detailer(servico):
-        servico.set_funilaria(servico.get_funilaria())
+    def lancar_servico_detailer(servico, valor_detailer, id_funileiro):
+        servico.set_funilaria(True)
+        servico.set_valor_detailer(valor_detailer)
+        servico.set_id_funileiro(id_funileiro)
         Servicos.Atualizar(servico)
 
     @staticmethod
     def finalizar_servico(servico):
         servico.set_finalizado(True)
+        Servicos.Atualizar(servico)
 
 #=======================================================
 
@@ -128,9 +123,8 @@ class View:
         return servicos_funileiro
     
     @staticmethod
-    def lancar_servico_funileiro(Servico):
-        novo_status = True 
-        Servico.set_funilaria(novo_status)
+    def lancar_servico_funileiro(Servico, valor_detailer):
+        Servico.set_valor_funileiro(valor_detailer)
         Servicos.Atualizar(Servico)
 
 #=======================================================
@@ -233,12 +227,12 @@ class View:
         return Servicos.Listar_ID(id)
 
     @staticmethod
-    def serviço_inserir(data , descrição, funilaria, valor_detailer, valor_funileiro, finalizado, foi_pago, id_cliente, id_detailer, id_funileiro, id_carro):
+    def servico_inserir(data , descrição, funilaria, valor_detailer, valor_funileiro, finalizado, foi_pago, id_cliente, id_detailer, id_funileiro, id_carro):
         servico = Servico(0, data, descrição, funilaria, valor_detailer, valor_funileiro, finalizado, foi_pago, id_cliente, id_detailer, id_funileiro, id_carro)
         Servicos.Inserir(servico)
 
     @staticmethod
-    def Serviços_excluir(id):
+    def servico_excluir(id):
         Serviços = Servicos.Listar_ID(id)
         if Serviços == None:
             return

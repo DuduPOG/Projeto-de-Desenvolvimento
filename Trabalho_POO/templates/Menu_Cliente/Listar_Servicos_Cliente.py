@@ -25,9 +25,6 @@ class ListarServicosClienteUI:
                 del dic_x['id']
                 del dic_x['valor_funileiro']
                 del dic_x['id_cliente']
-                del dic_x['id_detailer']
-                del dic_x['id_funileiro']
-                del dic_x['id_carro']
                 
                 
                 list_dic.append(dic_x)

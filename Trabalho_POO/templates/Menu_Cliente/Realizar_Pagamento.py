@@ -11,10 +11,8 @@ class RealizarPagamentoUI:
         st.header("Realizar Pagamento:")
 
         Servicos = []
-        for x in View.servicos_listar_por_id(id_cliente = st.session_state.get('cliente_id')):
-            if x.get_pagamento() == True:
-                continue
-            else:
+        for x in View.servicos_listar_todos():
+            if x.get_pagamento() == False and x.get_finalizado() == True:
                 Servicos.append(x)
 
         if len(Servicos) == 0:

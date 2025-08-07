@@ -14,15 +14,16 @@ class LancarServicoDUI:
 
         if len(Servicos) == 0:
             st.write("Você não tem nenhum Serviço para ser lançado")
+        else:
+            op = st.selectbox("Selecione o Serviço para lançar", Servicos)
+    
+            valor_detailer = st.number_input("Diga o valor do serviço: ")
 
-        op = st.selectbox("Selecione o Serviço para lançar", Servicos)
- 
-        if st.button("Mandar para Funilaria"):
-            op.set_funilaria(True)
+            op2 = st.selectbox("Selecione o funileiro: ", View.funileiro_listar_todos())
             
         if st.button("Lançar Serviço"):
             try:
-                View.lancar_servico_detailer(op)
+                View.lancar_servico_detailer(op, valor_detailer, op2.get_id())
                 st.success("Serviço lançado com sucesso")
                 time.sleep(2)
                 st.rerun()
