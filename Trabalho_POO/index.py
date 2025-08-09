@@ -69,7 +69,7 @@ class IndexUI:
     def menu_funileiro():
         op = st.sidebar.selectbox("Menu", ["Listar Meus Serviços", "Lançar Serviço"])
 
-        if op == "Listar Minhas Serviços":
+        if op == "Listar Meus Serviços":
             ListarServicosFunileiroUI.main()
 
         if op == "Lançar Serviço":

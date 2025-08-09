@@ -9,7 +9,7 @@ class ListarServicosDetailerUI:
         
         Servicos = []
         for x in View.servicos_listar_todos():
-            if x.get_id_detailer() == st.session_state.get('detailer_id'):
+            if x.get_id_detailer() == st.session_state.get('detailer_id') and x.get_finalizado() == False:
                 Servicos.append(x)
 
         if len(Servicos) == 0: 

@@ -23,7 +23,6 @@ class ListarServicosClienteUI:
                 dic_x = obj.to_json()
 
                 del dic_x['id']
-                del dic_x['valor_funileiro']
                 del dic_x['id_cliente']
                 
                 
